@@ -1,4 +1,5 @@
 ﻿
+
 @model IEnumerable<CasoPractico1.Models.Producto>
 
 @{
@@ -19,6 +20,7 @@
             <th>Categoría</th>
             <th>Precio</th>
             <th>Existencia</th>
+            <th>Unidad de medida</th>
             <th>Estado</th>
             <th>Acciones</th>
         </tr>
@@ -31,18 +33,28 @@
                 <td>@producto.Nombre</td>
                 <td>@producto.Categoria</td>
                 <td>@producto.Precio.ToString("N2")</td>
-                <td>@producto.Existencia  @producto.UnidadMedida?.Abreviatura</td>
+                <td>@producto.Existencia.ToString("N2")</td>
+                <td>
+                    @(producto.UnidadMedida != null
+                        ? $"{producto.UnidadMedida.Nombre} ({producto.UnidadMedida.Abreviatura})"
+                        : "Sin unidad")
+                </td>
                 <td>@(producto.Activo ? "Activo" : "Inactivo")</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@producto.Id" class="btn btn-info btn-sm">Detalles</a>
+                    <a asp-action="Details"
+                       asp-route-id="@producto.Id"
+                       class="btn btn-info btn-sm">Detalles</a>
 
-                    <a asp-action="Edit" asp-route-id="@producto.Id"
+                    <a asp-action="Edit"
+                       asp-route-id="@producto.Id"
                        class="btn btn-warning btn-sm">Editar</a>
 
-                    <a asp-action="Delete" asp-route-id="@producto.Id"
+                    <a asp-action="Delete"
+                       asp-route-id="@producto.Id"
                        class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
