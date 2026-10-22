@@ -31,9 +31,10 @@ namespace CasoPractico1.Models
         public decimal Precio { get; set; }
 
         [Required(ErrorMessage = "La existencia es obligatoria.")]
-        [Range(0, 9999, ErrorMessage = "La existencia debe estar entre {1} y {2}.")]
+        [Range(typeof(decimal), "0", "9999",
+        ErrorMessage = "La existencia debe estar entre {1} y {2}.")]
         [Display(Name = "Existencia")]
-        public int Existencia { get; set; }
+        public decimal Existencia { get; set; }
 
         [Display(Name = "Activo")]
         public bool Activo { get; set; } = true;

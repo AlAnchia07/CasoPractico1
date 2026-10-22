@@ -26,7 +26,7 @@
         <dd class="col-sm-9">@Model.Precio.ToString("N2")</dd>
 
         <dt class="col-sm-3">Existencia</dt>
-        <dd class="col-sm-9">@Model.Existencia</dd>
+        <dd class="col-sm-9">@Model.Existencia @Model.UnidadMedida?.Abreviatura</dd>
 
         <dt class="col-sm-3">Estado</dt>
         <dd class="col-sm-9">@(Model.Activo ? "Activo" : "Inactivo")</dd>

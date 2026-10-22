@@ -42,8 +42,8 @@ namespace CasoPractico1.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
 
-                    b.Property<int>("Existencia")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Existencia")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()

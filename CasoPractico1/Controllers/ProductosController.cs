@@ -37,6 +37,18 @@ namespace CasoPractico1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Producto producto)
         {
+            var unidad = await _context.UnidadesMedida
+                .FirstOrDefaultAsync(u => u.Id == producto.UnidadMedidaId);
+
+            if (unidad?.Abreviatura == "und" &&
+                producto.Existencia != decimal.Truncate(producto.Existencia))
+            {
+                ModelState.AddModelError(
+                    nameof(producto.Existencia),
+                    "La existencia debe ser un número entero para la unidad seleccionada."
+                );
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Productos.Add(producto);
@@ -77,6 +89,18 @@ namespace CasoPractico1.Controllers
             if (id != producto.Id)
             {
                 return NotFound();
+            }
+
+            var unidad = await _context.UnidadesMedida
+                .FirstOrDefaultAsync(u => u.Id == producto.UnidadMedidaId);
+
+            if (unidad?.Abreviatura == "und" &&
+                producto.Existencia != decimal.Truncate(producto.Existencia))
+            {
+                ModelState.AddModelError(
+                    nameof(producto.Existencia),
+                    "La existencia debe ser un número entero para la unidad seleccionada."
+                );
             }
 
             if (ModelState.IsValid)

@@ -42,7 +42,7 @@
 
             <div class="mb-3">
                 <label asp-for="Existencia" class="form-label"></label>
-                <input asp-for="Existencia" class="form-control" type="number" min="0" max="9999" />
+                <input asp-for="Existencia" class="form-control" type="number" min="0" max="9999" step="0.01" />
                 <span asp-validation-for="Existencia" class="text-danger"></span>
             </div>
 
