@@ -46,6 +46,17 @@
                 <span asp-validation-for="Existencia" class="text-danger"></span>
             </div>
 
+            <div class="mb-3">
+                <label asp-for="UnidadMedidaId" class="form-label"></label>
+                <select asp-for="UnidadMedidaId"
+                        asp-items="ViewBag.UnidadesMedida"
+                        class="form-select">
+                    <option value="">Seleccione una unidad de medida</option>
+                </select>
+                <span asp-validation-for="UnidadMedidaId"
+                      class="text-danger"></span>
+            </div>
+
             <div class="form-check mb-3">
                 <input asp-for="Activo" class="form-check-input" />
                 <label asp-for="Activo" class="form-check-label"></label>

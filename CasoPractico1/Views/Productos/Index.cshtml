@@ -31,9 +31,11 @@
                 <td>@producto.Nombre</td>
                 <td>@producto.Categoria</td>
                 <td>@producto.Precio.ToString("N2")</td>
-                <td>@producto.Existencia</td>
+                <td>@producto.Existencia  @producto.UnidadMedida?.Abreviatura</td>
                 <td>@(producto.Activo ? "Activo" : "Inactivo")</td>
                 <td>
+                    <a asp-action="Details" asp-route-id="@producto.Id" class="btn btn-info btn-sm">Detalles</a>
+
                     <a asp-action="Edit" asp-route-id="@producto.Id"
                        class="btn btn-warning btn-sm">Editar</a>
 

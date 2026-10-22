@@ -9,5 +9,7 @@ namespace CasoPractico1.Models
         }
 
         public DbSet<Producto> Productos { get; set; }
+
+        public DbSet<UnidadMedida> UnidadesMedida { get; set; }
     }
 }

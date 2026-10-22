@@ -1,6 +1,7 @@
 ﻿
 using CasoPractico1.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace CasoPractico1.Controllers
@@ -17,13 +18,17 @@ namespace CasoPractico1.Controllers
         // Listar productos
         public async Task<IActionResult> Index()
         {
-            var productos = await _context.Productos.ToListAsync();
+            var productos = await _context.Productos
+                .Include(p => p.UnidadMedida)
+                .ToListAsync();
+
             return View(productos);
         }
 
         // Mostrar formulario para registrar un producto
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            await CargarUnidadesMedida();
             return View();
         }
 
@@ -39,6 +44,7 @@ namespace CasoPractico1.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
+            await CargarUnidadesMedida();
 
             return View(producto);
         }
@@ -57,6 +63,8 @@ namespace CasoPractico1.Controllers
             {
                 return NotFound();
             }
+
+            await CargarUnidadesMedida();
 
             return View(producto);
         }
@@ -78,6 +86,8 @@ namespace CasoPractico1.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
+
+            await CargarUnidadesMedida();
 
             return View(producto);
         }
@@ -115,6 +125,26 @@ namespace CasoPractico1.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var producto = await _context.Productos
+                .Include(p => p.UnidadMedida)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            return producto == null ? NotFound() : View(producto);
+        }
+
+
+        private async Task CargarUnidadesMedida()
+        {
+            ViewBag.UnidadesMedida = new SelectList(
+                await _context.UnidadesMedida
+                    .OrderBy(u => u.Nombre)
+                    .ToListAsync(),"Id","Nombre");
         }
 
 

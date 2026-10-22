@@ -37,5 +37,11 @@ namespace CasoPractico1.Models
 
         [Display(Name = "Activo")]
         public bool Activo { get; set; } = true;
+
+        [Display(Name = "Unidad de medida")]
+        public int UnidadMedidaId { get; set; }
+
+        [ForeignKey(nameof(UnidadMedidaId))]
+        public UnidadMedida? UnidadMedida { get; set; }
     }
 }

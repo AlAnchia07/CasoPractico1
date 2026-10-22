@@ -1,0 +1,27 @@
+@model CasoPractico1.Models.Producto
+
+@{
+    ViewData["Title"] = "Detalle Producto";
+}
+
+<div class="container mt-4">
+    <h1>Detalle producto</h1>
+
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Nombre</h5>
+                    <p class="card-text"><strong>Codigo:</strong> @Model.Codigo</p>
+                    <p class="card-text"><strong>Categoría:</strong> @Model.Categoria</p>
+                    <p class="card-text"><strong>Precio:</strong> @Model.Precio.ToString("C", System.Globalization.CultureInfo.CurrentCulture)</p>
+                    <p class="card-text"><strong>Existencias:</strong> @Model.Existencia @Model.UnidadMedida?.Abreviatura</p>
+                    <p class="card-text"><strong>Activo:</strong> @(Model.Activo ? "Sí" : "No")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</div>
